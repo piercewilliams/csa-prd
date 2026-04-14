@@ -1,7 +1,7 @@
 # csa-prd — Working Context
 
-**Phase:** Post-delivery / Maintenance
-**Status:** V0.5 complete and delivered. Living document — updates as pipeline evolves.
+**Phase:** Post-delivery / Distributed
+**Status:** V0.5 distributed at CSA Weekly 2026-04-14. Framed as "goalpost" and "archive" by Chris — context for feature requests, not a live operational roadmap. Visualizations requested.
 **Last session:** 2026-04-14
 
 For stable reference facts: see [REFERENCE.md](REFERENCE.md)
@@ -12,9 +12,10 @@ For session history: see [sessions/](sessions/)
 ## Current State
 
 - **PRD V0.5 complete (2026-04-10 evening).** All 10 Chris Palo revision items implemented. Pasted into Google Docs — Google Doc is the live version.
+- **Distributed at CSA Weekly 2026-04-14.** Chris framed as "goalpost" document: every feature request should trace back to it. Also described as "archive" — snapshot in time, not a live roadmap. Chris's architectural framing: vertical "pipes" (T1–T5) + horizontal cross-cutting elements (publish-to-queue, tool nodes like Gary).
+- **Visualizations needed.** Chris explicitly requested Pierce produce diagrams for eng team clarity. Task logged in ops-hub (#2 pipeline architecture visuals).
 - **This repo** stores the PRD verbatim + context, status, gaps, and action items. The Google Doc is the canonical delivery artifact; this repo is the working record.
 - **P9 in ops-hub: CLOSED.** PRD is no longer tracked as an active project dependency. P15, P16, P11 dependencies satisfied.
-- PRD was initially built from Pierce's strategic assessment ("CSA Pipeline Structural Concerns: First Two Weeks") + Chris Palo direction (2026-04-10 meeting).
 
 ## What the PRD Covers
 
@@ -50,7 +51,7 @@ For session history: see [sessions/](sessions/)
 
 ## Known Gaps / Open Items
 
-- [ ] **Missing CSA-vision section** — What should the CSA ultimately be and do? Needs to be drafted and added to the Google Doc. This is the most significant structural gap in V0.5.
+- [x] ~~**Missing CSA-vision section**~~ — ADDED IN V0.5. The CSA Core Platform Vision section is now in the PRD. Distributed at CSA Weekly 2026-04-14.
 - [ ] **Gary tool roster per pipeline** — Pierce emailed Gary 2026-04-10 (CC Chris) requesting full tool roster. Gary = "unreliable" per Chris C&P Weekly 2026-04-13 (undocumented confidence score, vibe-coded validation). Gary integration as QA gate suspended. V1 roadmap: internal source ranking library. Need to update Gary's role in PRD once Chris's V1 scope is clearer.
 - [ ] **Infographics pipeline** — flagged by Chris (2026-04-10) as under investigation. Not fully specced. Add when scope firms up.
 - [ ] **Licensed partner content pipeline** — flagged by Chris (2026-04-10). Licensed influencer video/transcript → CSA → multiple articles. Not fully specced.
@@ -60,11 +61,12 @@ For session history: see [sessions/](sessions/)
 
 ## What's Next
 
-1. [ ] **Store PRD verbatim** — paste V0.5 text into `prd-v0.5.md` in this repo as the canonical markdown copy
-2. [ ] **Draft missing CSA-vision section** — what the CSA ultimately should be and do; add to Google Doc + mirror here
-3. [ ] **Update Gary section** once Chris's V1 source-ranking library scope is defined
-4. [ ] **Add infographics + licensed partner pipelines** when specced by Chris
-5. [ ] **Monitor Inclination Engine development** — update PRD as Trend Hunter app pipeline takes shape
+1. [x] ~~**Store PRD verbatim**~~ — DONE. `prd-v0.5.md` in this repo.
+2. [x] ~~**Draft missing CSA-vision section**~~ — DONE IN V0.5. CSA Core Platform Vision section added.
+3. [ ] **Build pipeline architecture visualizations** — standalone HTML diagrams (vertical pipes + horizontal cross-cutting elements) for eng team. Task #2 in ops-hub.
+4. [ ] **Update Gary section** once Chris's V1 source-ranking library scope + IP/contract resolution defined
+5. [ ] **Add infographics + licensed partner pipelines** when specced by Chris
+6. [ ] **Monitor Inclination Engine development** — update PRD as Trend Hunter app pipeline takes shape
 
 ---
 
