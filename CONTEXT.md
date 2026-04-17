@@ -1,8 +1,8 @@
 # csa-prd — Working Context
 
-**Phase:** Post-delivery / Distributed
-**Status:** V0.5 distributed at CSA Weekly 2026-04-14. Framed as "goalpost" and "archive" by Chris — context for feature requests, not a live operational roadmap. Visualizations requested.
-**Last session:** 2026-04-14
+**Phase:** Visualization / Active
+**Status:** V0.5 distributed. GitHub Pages visualization site built (local). 3-view toggle complete (Current State / PRD Ideal / Delta). Push + Pages enable pending.
+**Last session:** 2026-04-17
 
 For stable reference facts: see [REFERENCE.md](REFERENCE.md)
 For session history: see [sessions/](sessions/)
@@ -16,6 +16,8 @@ For session history: see [sessions/](sessions/)
 - **Visualizations needed.** Chris explicitly requested Pierce produce diagrams for eng team clarity. Task logged in ops-hub (#2 pipeline architecture visuals).
 - **This repo** stores the PRD verbatim + context, status, gaps, and action items. The Google Doc is the canonical delivery artifact; this repo is the working record.
 - **P9 in ops-hub: CLOSED.** PRD is no longer tracked as an active project dependency. P15, P16, P11 dependencies satisfied.
+- **Diagnostic document created (2026-04-17):** `data-keywords/reports/csa_pipeline_diagnostic_2026-04-17.docx` — 8-part analysis using Sully AI context engineering as primary audit lens. Covers: "agents" misnomer, cascade coupling failure mode, specific bug traces (PGS-98/104/82), PRD gap table, Sully AI 5-principle mapping, incremental path forward.
+- **GitHub Pages visualization site built (2026-04-17):** 3-view toggle — Current State (8-step flow with cascade coupling band + NOT BUILT grid), PRD Ideal (5-lane swimlane T1–T5 with shared Signal Layer / Quality Gates / Performance Tracking), Delta (12-item card analysis). Local server running; push to GitHub + enable Pages not yet done.
 
 ## What the PRD Covers
 
@@ -63,10 +65,12 @@ For session history: see [sessions/](sessions/)
 
 1. [x] ~~**Store PRD verbatim**~~ — DONE. `prd-v0.5.md` in this repo.
 2. [x] ~~**Draft missing CSA-vision section**~~ — DONE IN V0.5. CSA Core Platform Vision section added.
-3. [ ] **Build pipeline architecture visualizations** — standalone HTML diagrams (vertical pipes + horizontal cross-cutting elements) for eng team. Task #2 in ops-hub.
-4. [ ] **Update Gary section** once Chris's V1 source-ranking library scope + IP/contract resolution defined
-5. [ ] **Add infographics + licensed partner pipelines** when specced by Chris
-6. [ ] **Monitor Inclination Engine development** — update PRD as Trend Hunter app pipeline takes shape
+3. [x] ~~**Write pipeline diagnostic document**~~ — DONE 2026-04-17. `data-keywords/reports/csa_pipeline_diagnostic_2026-04-17.docx`.
+4. [x] ~~**Build pipeline architecture visualizations (v1)**~~ — DONE 2026-04-17. GitHub Pages site, 3-view toggle, csa-prd repo. Local only — push + Pages enable still needed.
+5. [ ] **Push csa-prd to GitHub and enable Pages** — `piercewilliams/csa-prd`, main branch root → `piercewilliams.github.io/csa-prd`
+6. [ ] **Update Gary section** once Chris's V1 source-ranking library scope + IP/contract resolution defined
+7. [ ] **Add infographics + licensed partner pipelines** when specced by Chris
+8. [ ] **Monitor Inclination Engine development** — update PRD as Trend Hunter app pipeline takes shape
 
 ---
 

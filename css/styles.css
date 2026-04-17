@@ -1,0 +1,544 @@
+/* ============================================================
+   CSA Pipeline Visualizer — styles.css
+   Modeled after csa-dashboard visual language
+   ============================================================ */
+
+:root {
+  --bg:           #0f1117;
+  --surface:      #1a1d27;
+  --surface2:     #22263a;
+  --surface3:     #2a2f47;
+  --border:       rgba(255,255,255,0.07);
+  --border-mid:   rgba(255,255,255,0.11);
+  --border-bright:rgba(255,255,255,0.18);
+  --text:         #f0f0f5;
+  --text-sub:     #9498b0;
+  --text-muted:   #5a5e78;
+
+  --blue:   #60a5fa; --blue-rgb:   96,165,250;
+  --teal:   #2dd4bf; --teal-rgb:   45,212,191;
+  --purple: #a78bfa; --purple-rgb: 167,139,250;
+  --gray:   #6b7280; --gray-rgb:   107,114,128;
+  --red:    #f87171; --red-rgb:    248,113,113;
+  --amber:  #fbbf24; --amber-rgb:  251,191,36;
+  --green:  #34d399; --green-rgb:  52,211,153;
+
+  --stage-w: 560px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Header ─────────────────────────────────────────────────────────────────── */
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(15,17,23,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-mid);
+  padding: 16px 32px 14px;
+}
+
+#header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+#header p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ── View toggle ─────────────────────────────────────────────────────────────── */
+#view-toggle {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.view-btn {
+  padding: 6px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border-mid);
+  background: var(--surface);
+  color: var(--text-sub);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.view-btn:hover {
+  background: var(--surface2);
+  color: var(--text);
+  border-color: var(--border-bright);
+}
+
+.view-btn.active {
+  background: var(--surface3);
+  color: var(--text);
+  border-color: var(--border-bright);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.view-btn[data-view="current"].active  { color: var(--red);    border-color: rgba(var(--red-rgb),0.5);    background: rgba(var(--red-rgb),0.07);    }
+.view-btn[data-view="ideal"].active    { color: var(--green);  border-color: rgba(var(--green-rgb),0.5);  background: rgba(var(--green-rgb),0.06);  }
+.view-btn[data-view="delta"].active    { color: var(--amber);  border-color: rgba(var(--amber-rgb),0.5);  background: rgba(var(--amber-rgb),0.06);  }
+
+/* ── Main content area ───────────────────────────────────────────────────────── */
+#main {
+  padding: 32px 32px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── SVG diagram container ───────────────────────────────────────────────────── */
+.svg-view {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.svg-view svg {
+  min-width: 860px;
+  display: block;
+}
+
+/* ── Legend ──────────────────────────────────────────────────────────────────── */
+#legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  color: var(--text-sub);
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ── Pipeline layout ─────────────────────────────────────────────────────────── */
+#pipeline-wrap {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.stages-col {
+  flex: 0 0 var(--stage-w);
+  display: flex;
+  flex-direction: column;
+}
+
+.annots-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-top: 4px;
+}
+
+/* ── Stage card ──────────────────────────────────────────────────────────────── */
+.stage-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stage {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border-mid);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.stage-bar {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  border-radius: 10px 0 0 10px;
+}
+
+.stage-inner {
+  padding: 13px 15px 13px 20px;
+}
+
+.stage-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.stage-num {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10.5px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #0f1117;
+}
+
+.stage-title-group { flex: 1; }
+
+.stage-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.stage-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-style: italic;
+}
+
+.model-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+  border: 1px solid transparent;
+}
+
+.stage-details {
+  margin-top: 5px;
+  padding-left: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stage-detail {
+  font-size: 11.5px;
+  color: var(--text-sub);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.55;
+}
+
+.stage-detail::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}
+
+.stage-detail.warn {
+  color: var(--red);
+}
+
+.stage-detail.good {
+  color: var(--green);
+}
+
+/* ── Connector ───────────────────────────────────────────────────────────────── */
+.connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.connector-line {
+  width: 2px;
+  height: 14px;
+  background: linear-gradient(to bottom, var(--border-mid), rgba(255,255,255,0.2));
+}
+
+.connector-arrow {
+  width: 0; height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid rgba(255,255,255,0.22);
+}
+
+/* ── Annotation cards (right column) ─────────────────────────────────────────── */
+.annot-slot {
+  /* matches height of corresponding stage-wrap including connector */
+}
+
+.annot-spacer {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.annot {
+  background: rgba(var(--red-rgb),0.05);
+  border: 1px solid rgba(var(--red-rgb),0.22);
+  border-radius: 8px;
+  padding: 11px 13px;
+  margin-bottom: 0;
+}
+
+.annot-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.annot-title::before { content: "⚠"; font-size: 12px; }
+
+.annot-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.annot-line {
+  font-size: 11.5px;
+  color: rgba(var(--red-rgb),0.8);
+  padding-left: 10px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.annot-line::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: rgba(var(--red-rgb),0.4);
+  font-size: 10px;
+  top: 3px;
+}
+
+/* ── Ideal view — note cards ──────────────────────────────────────────────────── */
+.note-missing {
+  background: rgba(var(--amber-rgb),0.05);
+  border-color: rgba(var(--amber-rgb),0.25);
+}
+.note-missing .annot-title { color: var(--amber); }
+.note-missing .annot-title::before { content: "✗"; }
+.note-missing .annot-line { color: rgba(var(--amber-rgb),0.85); }
+.note-missing .annot-line::before { color: rgba(var(--amber-rgb),0.4); }
+
+.note-refactor {
+  background: rgba(var(--blue-rgb),0.05);
+  border-color: rgba(var(--blue-rgb),0.22);
+}
+.note-refactor .annot-title { color: var(--blue); }
+.note-refactor .annot-title::before { content: "↻"; }
+.note-refactor .annot-line { color: rgba(var(--blue-rgb),0.85); }
+.note-refactor .annot-line::before { color: rgba(var(--blue-rgb),0.4); }
+
+/* ── Color helpers ───────────────────────────────────────────────────────────── */
+.color-blue   { color: var(--blue);   }
+.color-teal   { color: var(--teal);   }
+.color-purple { color: var(--purple); }
+.color-gray   { color: var(--gray);   }
+.color-green  { color: var(--green);  }
+.color-amber  { color: var(--amber);  }
+.color-red    { color: var(--red);    }
+
+.bg-blue   { background: rgba(var(--blue-rgb),0.08);   border-color: rgba(var(--blue-rgb),0.18);   }
+.bg-teal   { background: rgba(var(--teal-rgb),0.07);   border-color: rgba(var(--teal-rgb),0.18);   }
+.bg-purple { background: rgba(var(--purple-rgb),0.07); border-color: rgba(var(--purple-rgb),0.18); }
+.bg-gray   { background: rgba(var(--gray-rgb),0.08);   border-color: rgba(var(--gray-rgb),0.18);   }
+.bg-green  { background: rgba(var(--green-rgb),0.06);  border-color: rgba(var(--green-rgb),0.18);  }
+.bg-amber  { background: rgba(var(--amber-rgb),0.06);  border-color: rgba(var(--amber-rgb),0.18);  }
+
+.bar-blue   { background: var(--blue);   }
+.bar-teal   { background: var(--teal);   }
+.bar-purple { background: var(--purple); }
+.bar-gray   { background: var(--gray);   }
+.bar-green  { background: var(--green);  }
+.bar-amber  { background: var(--amber);  }
+
+.num-blue   { background: var(--blue);   }
+.num-teal   { background: var(--teal);   }
+.num-purple { background: var(--purple); }
+.num-gray   { background: var(--gray);   color: #fff; }
+.num-green  { background: var(--green);  }
+.num-amber  { background: var(--amber);  }
+
+.tag-teal   { background: rgba(var(--teal-rgb),0.12);   color: var(--teal);   border-color: rgba(var(--teal-rgb),0.3);   }
+.tag-purple { background: rgba(var(--purple-rgb),0.12); color: var(--purple); border-color: rgba(var(--purple-rgb),0.3); }
+.tag-gray   { background: rgba(var(--gray-rgb),0.15);   color: #9ca3af;       border-color: rgba(var(--gray-rgb),0.3);   }
+
+/* ── Delta view ──────────────────────────────────────────────────────────────── */
+#delta-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.delta-card {
+  border-radius: 10px;
+  border: 1px solid;
+  overflow: hidden;
+}
+
+.delta-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.delta-status {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.delta-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.delta-col {
+  padding: 12px 16px;
+}
+
+.delta-col + .delta-col {
+  border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+.delta-col-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.delta-stage-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.delta-change-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-top: 4px;
+}
+
+.delta-change {
+  font-size: 11.5px;
+  color: var(--text-sub);
+  padding-left: 12px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.delta-change::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  font-size: 10px;
+  top: 3px;
+}
+
+.delta-priority {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* Status: missing */
+.delta-card.status-missing {
+  background: rgba(var(--amber-rgb),0.04);
+  border-color: rgba(var(--amber-rgb),0.2);
+}
+.delta-card.status-missing .delta-header { background: rgba(var(--amber-rgb),0.06); }
+.delta-card.status-missing .delta-status { background: rgba(var(--amber-rgb),0.15); color: var(--amber); }
+.delta-card.status-missing .delta-stage-name { color: var(--amber); }
+.delta-card.status-missing .delta-change::before { color: rgba(var(--amber-rgb),0.5); }
+
+/* Status: refactor */
+.delta-card.status-refactor {
+  background: rgba(var(--blue-rgb),0.04);
+  border-color: rgba(var(--blue-rgb),0.18);
+}
+.delta-card.status-refactor .delta-header { background: rgba(var(--blue-rgb),0.06); }
+.delta-card.status-refactor .delta-status { background: rgba(var(--blue-rgb),0.15); color: var(--blue); }
+.delta-card.status-refactor .delta-stage-name { color: var(--blue); }
+.delta-card.status-refactor .delta-change::before { color: rgba(var(--blue-rgb),0.5); }
+
+/* Status: fix */
+.delta-card.status-fix {
+  background: rgba(var(--red-rgb),0.04);
+  border-color: rgba(var(--red-rgb),0.2);
+}
+.delta-card.status-fix .delta-header { background: rgba(var(--red-rgb),0.06); }
+.delta-card.status-fix .delta-status { background: rgba(var(--red-rgb),0.15); color: var(--red); }
+.delta-card.status-fix .delta-stage-name { color: var(--red); }
+.delta-card.status-fix .delta-change::before { color: rgba(var(--red-rgb),0.5); }
+
+/* Status: keep */
+.delta-card.status-keep {
+  background: rgba(var(--green-rgb),0.03);
+  border-color: rgba(var(--green-rgb),0.15);
+}
+.delta-card.status-keep .delta-header { background: rgba(var(--green-rgb),0.05); }
+.delta-card.status-keep .delta-status { background: rgba(var(--green-rgb),0.12); color: var(--green); }
+.delta-card.status-keep .delta-stage-name { color: var(--green); }
+.delta-card.status-keep .delta-change::before { color: rgba(var(--green-rgb),0.4); }
+
+/* ── Footer ──────────────────────────────────────────────────────────────────── */
+#footer {
+  padding: 16px 32px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ── Transitions ─────────────────────────────────────────────────────────────── */
+.view-section {
+  transition: opacity 0.15s ease;
+}
